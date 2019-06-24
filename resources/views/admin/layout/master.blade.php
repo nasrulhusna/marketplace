@@ -224,6 +224,7 @@
         <li><a href="{{route('category.index')}}"><i class="fa fa-list"></i> <span>Kategori</span></a></li>
         <li><a href="https://adminlte.io/docs"><i class="fa fa-table"></i> <span>Produk</span></a></li>
         <li class=""><a href="{{ route('media.index')}}"><i class="fa fa-file"></i> <span>Media</span></a></li>
+        <li class=""><a href="{{ route('admin.user')}}"><i class="fa fa-user"></i> <span>User</span></a></li>
         
 
   <!--       <li>
