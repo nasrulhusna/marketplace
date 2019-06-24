@@ -117,6 +117,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product->delete();
+         Alert::success('Success Message', 'Data telah berhasil dihapus');
+         return redirect(route('product.index'));
     }
 }
