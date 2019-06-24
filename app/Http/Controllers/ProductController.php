@@ -73,7 +73,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+         $product = Product::find($id);
+        $categorys = Category::where('parent_id',null)->get();
+        return view('admin.product.edit',compact('product','categorys'));
     }
 
     /**
@@ -85,7 +87,26 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($file = $request->file('file'))
+        {
+        $filename = $file->getClientOriginalName();
+        $request->file('file')->move('static/dist/img/',$filename);
+        $img = 'static/dist/img/'.$filename;
+    }else{
+        $img = $request->tmp_image;
+    }
+        $product = Product::find($id);
+        $product->slug = $request->slug;
+        $product->photo = $img;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->stock = $request->stok;
+        $product->price = $request->price;
+        $product->category_id = $request->category_id;
+        $product->user_id     = Auth::user()->id;
+        $product->save();
+        Alert::success('Success Message', 'Data telah berhasil diedit');
+        return redirect(route('product.index'));
     }
 
     /**
