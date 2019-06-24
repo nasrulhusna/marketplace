@@ -25,7 +25,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+         $categorys = Category::where('parent_id',null)->get();
+        return view('admin.product.add',compact('categorys'));
     }
 
     /**
@@ -36,7 +37,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $file = $request->file('file');
+        $filename = $file->getClientOriginalName();
+        $request->file('file')->move('static/dist/img/',$filename);
+        $product = new Product;
+        $product->slug = $request->slug;
+        $product->photo = 'static/dist/img/'.$filename;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->stock = $request->stok;
+        $product->price = $request->price;
+        $product->category_id = $request->category_id;
+        $product->user_id     = Auth::user()->id;
+        $product->save();
+        Alert::success('Success Message', 'Data telah berhasil ditambahkan');
+        return redirect(route('product.index'));
     }
 
     /**
