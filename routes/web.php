@@ -26,6 +26,8 @@ Route::prefix('admin')->group(function(){
 	// Route::post('category','CategoryController@store')->name('admin.category');
 	Route::resource('category','CategoryController');
     Route::resource('product','ProductController');
+    // user
+	Route::get('user','UserController@index')->name('admin.user');
 
 
 });
