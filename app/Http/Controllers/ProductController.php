@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Category;
+use Alert;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProductController extends Controller
 {
@@ -23,10 +27,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // fungsi create
     public function create()
     {
-         $categorys = Category::where('parent_id',null)->get();
+        $categorys = Category::where('parent_id',null)->get();
         return view('admin.product.add',compact('categorys'));
+
+        //
     }
 
     /**
@@ -35,9 +42,10 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // fungsi tambah
     public function store(Request $request)
     {
-         $file = $request->file('file');
+        $file = $request->file('file');
         $filename = $file->getClientOriginalName();
         $request->file('file')->move('static/dist/img/',$filename);
         $product = new Product;
@@ -52,6 +60,10 @@ class ProductController extends Controller
         $product->save();
         Alert::success('Success Message', 'Data telah berhasil ditambahkan');
         return redirect(route('product.index'));
+
+
+
+        //
     }
 
     /**
@@ -73,7 +85,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-         $product = Product::find($id);
+        //
+
+        $product = Product::find($id);
         $categorys = Category::where('parent_id',null)->get();
         return view('admin.product.edit',compact('product','categorys'));
     }
@@ -87,6 +101,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //
         if($file = $request->file('file'))
         {
         $filename = $file->getClientOriginalName();
@@ -117,6 +132,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        //
+        $product = Product::find($id);
         $product->delete();
          Alert::success('Success Message', 'Data telah berhasil dihapus');
          return redirect(route('product.index'));

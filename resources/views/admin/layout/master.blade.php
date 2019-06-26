@@ -63,14 +63,14 @@
               <span class="label label-success">4</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
+              
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="{{ Auth::user()->photo}}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -142,13 +142,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ Auth::user()->photo}}" class="user-image" alt="User Image">
+              <!-- <img src="{{ Auth::user()->photo}}" class="user-image" alt="User Image"> -->
               <span class="hidden-xs">{{ Auth::user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <!-- <img src="{{ Auth::user()->photo }}" class="img-circle" alt="User Image"> -->
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -208,21 +208,35 @@
       </div>
       <!-- search form -->
       <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
+        <!-- <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
               </span>
-        </div>
+        </div> -->
       </form>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active"><a href="https://adminlte.io/docs"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+        <li class="active"><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li><a href="{{route('category.index')}}"><i class="fa fa-list"></i> <span>Kategori</span></a></li>
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-table"></i> <span>Produk</span></a></li>
+        <!-- <li><a href="https://adminlte.io/docs"><i class="fa fa-table"></i> <span>Produk</span></a></li> -->
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i><span>Produk</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('product.create')}}"><i class="fa fa-plus"></i> Tambah produk</a></li>
+            <li class="treeview">
+            </li>
+            <li><a href="{{ route('product.index')}}"><i class="fa fa-list"></i> List produk</a></li>
+          </ul>
+        </li>
         <li class=""><a href="{{ route('media.index')}}"><i class="fa fa-file"></i> <span>Media</span></a></li>
         <li class=""><a href="{{ route('admin.user')}}"><i class="fa fa-user"></i> <span>User</span></a></li>
         

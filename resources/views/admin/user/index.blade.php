@@ -28,7 +28,7 @@
           
             <!-- /.box-header -->
             <div class="box-body">
-              <a href="{{ route('product.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> Tambah user</a>
+              <a href="{{ route('admin.user.create') }}" class="btn btn-success"><i class="fa fa-plus"></i> Tambah user</a>
               <br><br>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -46,6 +46,7 @@
                 </tr>
                 </thead>
                 <tbody>
+
                  @php
                  $no = 1;
                  @endphp
@@ -60,12 +61,16 @@
                    <td>{{ $user->gender}}</td>
                    <td>
                      @if($user->status == '0')
-                     Non Aktif
+                     <a href="{{ url('admin/user/status/'.$user->id) }}" class="text-danger">Non Aktif</a>
                      @else
-                     Aktif
+                     <a href="{{ url('admin/user/status/'.$user->id) }}" class="text-primary">Aktif</a>
                      @endif
                    </td>
                    <td>{{ $user->role }}</td>
+                   <td>
+                     <a href="{{ url('admin/user/edit/'.$user->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Edit</a>
+                      <a href="{{ url('admin/user/delete/'.$user->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>Hapus</a>
+                   </td>
                  </tr>
                  @endforeach
                 </tbody>

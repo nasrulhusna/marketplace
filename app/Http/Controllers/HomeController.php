@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\category;
+use App\product;
+use App\user;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $category = Category::all();
+        $product = Product::all();
+        $user = User::all();
+        return view('admin.dashboard',compact('category','product','user'));
+    }
+    public function media()
+    {
+        $data = array('title' => 'Atur Media');
+        return view('admin.media',compact($data));
     }
 }
