@@ -36,4 +36,11 @@ class BerandaController extends Controller
     	// $product = DB::table('product')->paginate(6);
     	return view('homepage.productbycategory',compact('product','category','name'));
     }
+      public function detail($slug)
+    {
+        $user = User::all()->first();
+        $product = Product::where('slug',$slug)->first();
+        $category= $this->category;
+        return view('homepage.detail',compact('product','category','user'));
+    }
 }
