@@ -43,4 +43,19 @@ class BerandaController extends Controller
         $category= $this->category;
         return view('homepage.detail',compact('product','category','user'));
     }
+        public function supplier()
+    {
+        
+        $category= $this->category;
+        $user = User::orderBy('id','DESC')->where('status',1)->where('status','!=','member')->get();
+        return view('homepage.supplier',compact('category','user'));
+    }
+    public function productbysupplier($id)
+    {
+        $category= $this->category;
+        $user = User::find($id);
+        
+        $product = $user->product;
+        return view('homepage.productpenjual',compact('product','category','user'));
+    }
 }
