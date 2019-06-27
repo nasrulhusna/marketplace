@@ -14,7 +14,9 @@
 Route::get('/', 'BerandaController@index');
 Route::get('/product', 'BerandaController@product');
 Route::get('/category/{slug}', 'BerandaController@productbycategory')->name('category.product');
+Route::get('/supplier/{id}', 'BerandaController@productbysupplier');
 Route::get('product/detail/{slug}','BerandaController@detail');
+Route::get('/supplier','BerandaController@supplier');
 
 Auth::routes();
 
